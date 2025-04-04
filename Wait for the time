@@ -1,14 +1,1 @@
-import serial
-import json
 
-# Change the COM port to the correct one
-ser = serial.Serial('COM3', 9600, timeout=1)  # Adjust the COM port & baud rate
-
-while True:
-    if ser.in_waiting > 0:
-        data = ser.readline().decode('utf-8').strip()  # Read sensor data
-        try:
-            sensor_data = json.loads(data)  # Convert JSON string to Python dict
-            print("Received Data:", sensor_data)
-        except json.JSONDecodeError:
-            print("Invalid data received:", data)
